@@ -38,12 +38,6 @@ class App extends Component {
       })   
   }
   
-  handleSetActiveDrink = (id) => {
-    this.setState({
-      activeDrinkId: id
-    })
-  }
-  
   render() {
     
     return (
