@@ -8,21 +8,18 @@ import PropTypes from 'prop-types';
 
 import './DrinksList.css'
 
-const DrinksList = ({drinks}) => {
-  console.log(drinks);
+const DrinksList = ({drinks, setActiveDrink}) => {
   
   return (
-    <Router>
-      <div className="DrinkList">
-        List
-        <hr/>
-          {drinks.map((drink) => (
-            <div key={drink.idDrink}>
-              <Link to={`/${drink.idDrink}`}>{drink.strDrink}</Link>
-            </div>
-          ))}
-      </div>
-    </Router>  
+    <div className="DrinkList">
+      List
+      <hr/>
+        {drinks.map((drink) => (
+          <div key={drink.idDrink}>
+            <Link to={`/${drink.idDrink}`}>{drink.strDrink}</Link>
+          </div>
+        ))}
+    </div>
   );
 }
 

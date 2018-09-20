@@ -7,13 +7,15 @@ import {
 
 import DrinksList from './DrinksList';
 import Welcome from './Welcome';
+import BeverageDetails from './BeverageDetails';
 
 import './App.css';
 
 class App extends Component {
   state = {
     cocktails: [],
-    drinks: []
+    drinks: [],
+    activeDrinkId: undefined
   }
 
   componentDidMount(){
@@ -33,26 +35,31 @@ class App extends Component {
         this.setState({
           cocktails: cocktails.cocktails
         })
-      })
-      
-      
+      })   
   }
   
+  handleSetActiveDrink = (id) => {
+    this.setState({
+      activeDrinkId: id
+    })
+  }
   
   render() {
     
     return (
+      <Router>
       <div className="App">
         <div className="App__leftSide">
-          <DrinksList drinks={this.state.drinks}/>
+          <DrinksList setActiveDrink={this.handleSetActiveDrink} drinks={this.state.drinks}/>
         </div>
         <div className="App__rightSide">
-          <Router>
+          <div>
             <Route exact path="/" component={Welcome}/>
-            
-          </Router>
+            <Route path="/:id" component={BeverageDetails}/>
+          </div>
         </div>
       </div>
+      </Router>
     );
   }
 }
