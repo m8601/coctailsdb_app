@@ -1,4 +1,9 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 import './DrinksList.css'
@@ -7,15 +12,17 @@ const DrinksList = ({drinks}) => {
   console.log(drinks);
   
   return (
-    <div className="DrinkList">
-      List
-      <hr/>
-      {drinks.map((drink) => (
-        <div key={drink.idDrink}>
-          {drink.strDrink}
-        </div>
-      ))}
-    </div>
+    <Router>
+      <div className="DrinkList">
+        List
+        <hr/>
+          {drinks.map((drink) => (
+            <div key={drink.idDrink}>
+              <Link to={`/${drink.idDrink}`}>{drink.strDrink}</Link>
+            </div>
+          ))}
+      </div>
+    </Router>  
   );
 }
 
