@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Image, Grid, Col, Row} from 'react-bootstrap';
+import './BeverageDetails.css';
 
 class BeverageDetails extends Component {
   state = {
@@ -15,7 +17,6 @@ class BeverageDetails extends Component {
         this.setState({
           details: details.drinks[0]
         })
-        console.log(this.state.details);
       })
   }
   
@@ -49,7 +50,6 @@ class BeverageDetails extends Component {
       drink.strIngredient15,
     ];
     ingredients = ingredients.filter(Boolean);
-    console.log(ingredients);
     
     return ingredients;
   }
@@ -57,17 +57,35 @@ class BeverageDetails extends Component {
 
   render(){
     let ingredients = this.getIngredients();
+    console.log(this.state.details);
     
     return (
-      <div>
-        <img src={this.state.details.strDrinkThumb} alt=""/>
+      <div className="BeverageDetails">
+        <Image className="BeverageDetails__thumbnail" src={this.state.details.strDrinkThumb} circle />
+        
         <h2>{this.state.details.strDrink}</h2>
-        <p>Ingridients:</p>
-        {ingredients.map((el,index) => (
-          <div key={index}>
-            {el}
-          </div>
-        ))}
+        <hr/>
+        <Grid>
+          <Row className="show-grid">
+            <Col xs={12} md={4}>
+              <p>Instructions:</p>
+              {(!this.state.details.strInstructions)? 'Mix all' : `${this.state.details.strInstructions}`}
+            </Col>
+            <Col xs={12} md={4}>
+              <p>Ingridients:</p>
+              {ingredients.map((el,index) => (
+                <div key={index}>
+                  {el}
+                </div>
+              ))}
+            </Col>
+            <Col xs={12} md={4}>
+              <p>Glass:</p>
+              {this.state.details.strGlass}
+            </Col>
+          </Row>
+        </Grid>
+        
       </div>
     );
   }

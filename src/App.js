@@ -14,11 +14,18 @@ import './App.css';
 class App extends Component {
   state = {
     cocktails: [],
-    drinks: [],
-    activeDrinkId: undefined
+    drinks: []
   }
 
   componentDidMount(){
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail')
+      .then((response) => response.json())
+      .then((data) => {
+        let cocktails = JSON.parse(JSON.stringify(data));
+        this.setState({
+          cocktails: cocktails.drinks
+        })
+      });
     fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary_Drink')
       .then((response) => response.json())
       .then((data) => {
@@ -26,25 +33,23 @@ class App extends Component {
         this.setState({
           drinks: drinks.drinks
         })
-      })
+      });
     
-      fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail')
-      .then((response) => response.json())
-      .then((data) => {
-        let cocktails = JSON.parse(JSON.stringify(data));
-        this.setState({
-          cocktails: cocktails.cocktails
-        })
-      })   
+    
   }
   
+  //
   render() {
     
     return (
       <Router>
       <div className="App">
         <div className="App__leftSide">
-          <DrinksList setActiveDrink={this.handleSetActiveDrink} drinks={this.state.drinks}/>
+          <DrinksList
+            setActiveDrink={this.handleSetActiveDrink} 
+            drinks={this.state.drinks}
+            cocktails={this.state.cocktails}
+            />
         </div>
         <div className="App__rightSide">
           <div>

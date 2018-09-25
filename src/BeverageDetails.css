@@ -1,0 +1,9 @@
+.BeverageDetails {
+  padding: 50px;
+  
+  text-align: center;
+}
+
+.BeverageDetails__thumbnail {
+  width: 200px;
+}
